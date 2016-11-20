@@ -1,0 +1,59 @@
+package br.edu.ifsc.nerdstore.beans;
+
+import java.io.Serializable;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import br.edu.ifsc.nerdstore.dao.CarrinhoDAO;
+import br.edu.ifsc.nerdstore.dao.UsuarioDAO;
+import br.edu.ifsc.nerdstore.modelo.Usuario;
+import br.edu.ifsc.nerdstore.util.JsfUtil;
+
+@ManagedBean
+@ViewScoped
+public class LoginBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Usuario usuario = new Usuario();
+
+	private UsuarioDAO dao;
+
+	
+	public LoginBean(){
+		this.dao = UsuarioDAO.getInstance();
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public String efetuaLogin() {
+		System.out.println("Fazendo login do usuário " + this.usuario.getEmail());
+		boolean existe = dao.usuarioExiste(this.usuario.getEmail());
+
+		FacesContext fc = JsfUtil.getFacesContext();
+		if (existe) {
+			fc.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
+			fc.getExternalContext().getSessionMap().put("carrinho", CarrinhoDAO.getInstance().adicionaCarrinhoSeNaoTem(usuario.getId()) );
+			return "loja?faces-redirect=true";
+		}
+		fc.getExternalContext().getFlash().setKeepMessages(true);
+		fc.addMessage(null, new FacesMessage("Usuário não encontrado!"));
+
+		return "login?faces-redirect=true";
+	}
+
+	public String deslogar() {
+		FacesContext fc = JsfUtil.getFacesContext();
+		fc.getExternalContext().getSessionMap().remove("usuarioLogado");
+		fc.getExternalContext().getSessionMap().remove("carrinho");
+		return "login?faces-redirect=true";
+	}
+}

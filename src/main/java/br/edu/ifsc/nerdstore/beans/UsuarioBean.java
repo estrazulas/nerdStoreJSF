@@ -1,0 +1,56 @@
+package br.edu.ifsc.nerdstore.beans;
+
+import java.io.Serializable;
+import java.util.Collection;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import br.edu.ifsc.nerdstore.dao.UsuarioDAO;
+import br.edu.ifsc.nerdstore.modelo.Usuario;
+import br.edu.ifsc.nerdstore.util.RedirectView;
+
+@ManagedBean
+@ViewScoped
+public class UsuarioBean  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Collection<Usuario> usuarios = UsuarioDAO.getInstance().listarTodos();
+	
+	private Usuario novo = new Usuario();
+	
+	private UsuarioDAO dao = UsuarioDAO.getInstance();
+	
+	private FacesContext fc;
+
+	public Collection<Usuario> getUsuarios() 
+	{
+		return usuarios;
+	}
+	
+	public Usuario getNovo() 
+	{
+		return novo;
+	}
+	
+	public RedirectView  gravar() 
+	{
+		System.out.println("Gravando usuário " + novo.getEmail());
+
+		if(!dao.usuarioExiste(novo.getEmail())){
+			dao.adiciona(this.novo);
+		}else{
+			fc.addMessage(null, new FacesMessage("Usuário já existe!"));
+			return new RedirectView("usuario");
+		}
+		
+		return new RedirectView("loja");
+	}
+	
+}
