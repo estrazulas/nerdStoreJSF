@@ -1,6 +1,7 @@
 package br.edu.ifsc.nerdstore.beans;
 
 import java.io.Serializable;
+import java.util.Random;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -56,4 +57,5 @@ public class LoginBean implements Serializable {
 		fc.getExternalContext().getSessionMap().remove("carrinho");
 		return "login?faces-redirect=true";
 	}
+	
 }

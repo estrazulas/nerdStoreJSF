@@ -42,7 +42,7 @@
 						title="#{mensagens['loja.comprar']}">
 						<f:param name="idProduto" value="#{produto.id}" />
 					</p:commandButton>
-					
+					<p:rating value="#{lojaBean.getRandom()}" readonly="true" />
 				</h:panelGrid>
 				</h:form>
 			</p:panel>

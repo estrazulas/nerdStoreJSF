@@ -3,6 +3,7 @@ package br.edu.ifsc.nerdstore.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -70,6 +71,13 @@ public class LojaBean implements Serializable {
 
 	public List<String> getImages() {
 		return ProdutoDAO.getInstance().getImagens();
+	}
+	
+
+	public Integer getRandom(){
+		Random ran = new Random();
+		int x = ran.nextInt(5)+1;
+		return x;
 	}
 
 }
