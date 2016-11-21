@@ -25,15 +25,24 @@
 
 						<p:column>
 							<p:graphicImage url="#{item.getProduto().urlImagem}" width="100" height="100"/>
+							<h:outputText value="#{item.getProduto().nome}" />
 						</p:column>
-						<p:column headerText="#{mensagens['itemcarrinho.produtos']}">
-						<h:outputText value="#{item.quantidade}" /> UN - 
-						<h:outputText value="#{item.getProduto().nome}" /> <br/> 					     
+						<p:column headerText="#{mensagens['itemcarrinho.precounitario']}">
+							<h:outputText value="#{item.getProduto().preco}" >
+								<f:convertNumber type="currency" pattern="R$ #0.00"
+									currencySymbol="R$" locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="#{mensagens['itemcarrinho.quantidade']}">
+						<h:outputText value="#{item.quantidade}" /> UN 
+						</p:column>
+						<p:column headerText="#{mensagens['itemcarrinho.total']}">
 					    <h:outputText style="color:blue;font-weight:bold" value="#{item.totalDoItem}">
 								<f:convertNumber type="currency" pattern="R$ #0.00"
 									currencySymbol="R$" locale="pt_BR" />
 							</h:outputText>
 						</p:column>
+						
 						<p:column>
 							<p:commandButton update="produtosCarrinho"	process="formCarrinho" value="#{mensagens['itemcarrinho.remover']}" type="submit" action="#{carrinhoBean.removerItem()}" icon="fa fa-fw fa-remove" immediate="true" >
 								<f:param name="idItem" value="#{item.id}" />
