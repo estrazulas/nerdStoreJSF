@@ -13,7 +13,7 @@
 	</ui:define>
 	<ui:define name="conteudo">
 		<p:dataGrid var="produto" value="#{lojaBean.produtos}" columns="2"
-			layout="grid" rows="5" paginator="true" id="gridProdutos"
+			layout="grid" rows="6" paginator="true" id="gridProdutos"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="6,12,16">
 
@@ -21,9 +21,10 @@
            	#{mensagens['loja.titulo']}
         	</f:facet>
 
+<h:form id="comprar#{produto.id}">
 			<p:panel header="#{produto.nome}" style="text-align:center">
-				<h:form id="comprar#{produto.id}">
-				<h:panelGrid columns="1" style="width:100%">
+				
+				<p:panelGrid columns="1" style="width:100%">
 				
 					<p:graphicImage url="#{produto.urlImagem}" />
 					
@@ -38,15 +39,15 @@
 						<f:selectItems value="#{lojaBean.getQuantidades()}" />
 					</p:selectOneMenu>
 					
-					<p:commandButton update="@form" icon="fa fa-fw fa-shopping-cart" action="#{lojaBean.comprar()}" value="#{mensagens['loja.comprar']}"
+					<p:commandButton update="@form" excute="@form" icon="fa fa-fw fa-shopping-cart" action="#{lojaBean.comprar()}" value="#{mensagens['loja.comprar']}"
 						title="#{mensagens['loja.comprar']}">
 						<f:param name="idProduto" value="#{produto.id}" />
 					</p:commandButton>
 					<p:rating value="#{lojaBean.getRandom()}" readonly="true" />
-				</h:panelGrid>
-				</h:form>
+				</p:panelGrid>
+				
 			</p:panel>
-
+</h:form>
 		</p:dataGrid>
 	</ui:define>
 </ui:composition>
