@@ -20,7 +20,7 @@ public class Autorizador implements PhaseListener{
     	
     	String pagina = fc.getViewRoot().getViewId();
     	
-    	if("/login.xhtml".equals(pagina)){
+    	if("/login.xhtml".equals(pagina) || "/usuario.xhtml".equals(pagina)){
     		return;
     	}
     	

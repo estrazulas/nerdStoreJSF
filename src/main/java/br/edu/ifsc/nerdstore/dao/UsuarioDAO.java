@@ -1,10 +1,10 @@
 package br.edu.ifsc.nerdstore.dao;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import br.edu.ifsc.nerdstore.modelo.Produto;
 import br.edu.ifsc.nerdstore.modelo.Usuario;
 
 
@@ -46,8 +46,8 @@ public class UsuarioDAO {
 		return USUARIOS.containsKey(email);
 	}
 
-	public Collection<Usuario> listarTodos() {
-		return USUARIOS.values();
+	public List<Usuario> listarTodos() {
+		return new ArrayList<>(USUARIOS.values());
 	}
 
 

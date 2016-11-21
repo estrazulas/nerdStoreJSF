@@ -11,7 +11,7 @@
 		<p:messages globalOnly="true" />
 		<h:form id="login">
 			<p:fieldset legend="#{mensagens['loja.fazlogin']}">
-				<p:panelGrid columns="3">
+				<p:panelGrid columns="3" cellpadding="5">
 					<p:outputLabel value="#{mensagens['usuario.email']}" for="email" />
 					<p:inputText id="email" value="#{loginBean.usuario.email}" required="true">
 						<f:passThroughAttribute name="type" value="email" />
@@ -25,6 +25,9 @@
 				</p:panelGrid>
 			</p:fieldset>
 		</h:form>
+		<p:panel>
+			<p:commandButton action="usuario?faces-redirect=true"  value="#{mensagens['usuario.naocadastrado']}"/>
+		</p:panel>
 	</ui:define>
 </ui:composition>
 </html>

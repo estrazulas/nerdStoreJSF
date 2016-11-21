@@ -1,22 +1,35 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/WEB-INF/comum/cabecalho.jsp" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">
+		<p:outputPanel>#{mensagens['usuario.novousuario']}</p:outputPanel>
+	</ui:define>
 
-<hr />
-<div class="container crud">
-	<h2 style="margin-left:10px">-<fmt:message key="usuario.novousuario"/></h2>
-	<form method="post" action="executa">
-	  <div class="form-group">
-	    <label for="email"><fmt:message key="usuario.email"/></label>
-	    <input type="email" class="form-control" required="required" id="email" name="email">
-	  </div>
-	  <div class="form-group">
-	    <label for="pwd"><fmt:message key="usuario.senha"/></label>
-	    <input type="password" required="required" class="form-control" id="pwd" name="senha">
-	  </div>
-	  <input type="hidden" name="tarefa" value="salvaUsuario"/>
-	  <button type="submit" class="btn btn-default"><fmt:message key="sistema.gravar"/></button>
-	</form>
-</div>
-<c:import url="/WEB-INF/comum/rodape.jsp" />
+	<ui:define name="conteudo">
+		<h:form>
+			<p:messages id="messages" />
+
+			<p:fieldset legend="#{mensagens['usuario.novousuario']}">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="#{mensagens['usuario.email']}" for="email" />
+					<p:inputText id="email" value="#{usuarioBean.novo.email}"
+						required="true">
+						<f:ajax event="blur" render="messages" />
+					</p:inputText>
+					<p:outputLabel value="#{mensagens['usuario.senha']}" for="senha" />
+					<p:password id="senha" value="#{usuarioBean.novo.senha}"/>
+					<p:commandButton value="#{mensagens['sistema.gravar']}" action="#{usuarioBean.gravar()}" update="@form"
+						process="@form" />										
+				</p:panelGrid>
+			</p:fieldset>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
