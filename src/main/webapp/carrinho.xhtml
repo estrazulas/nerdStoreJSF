@@ -13,7 +13,7 @@
 	</ui:define>
 	<ui:define name="conteudo">
 		<p:messages globalOnly="true" />
-		<h:form>
+		<h:form id="formCarrinho">
 			<p:panel id="carrinho" 
 				style="margin-bottom:20px;width:50%;margin:auto">
 				<h:panelGrid columns="2" cellpadding="10" >
@@ -35,9 +35,9 @@
 							</h:outputText>
 						</p:column>
 						<p:column>
-							<h:commandLink value="X" action="#{carrinhoBean.removerItem()}" immediate="true" update="@all">
+							<p:commandButton update="produtosCarrinho"	process="formCarrinho" value="#{mensagens['itemcarrinho.remover']}" type="submit" action="#{carrinhoBean.removerItem()}" icon="fa fa-fw fa-remove" immediate="true" >
 								<f:param name="idItem" value="#{item.id}" />
-							</h:commandLink>
+							</p:commandButton>
 						</p:column>
 						<f:facet name="footer">
 						 <h:outputLabel value="#{mensagens['carrinho.total']}" /> -

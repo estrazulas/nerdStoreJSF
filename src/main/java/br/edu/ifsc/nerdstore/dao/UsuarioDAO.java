@@ -45,7 +45,9 @@ public class UsuarioDAO {
 	public boolean usuarioExiste(String email) {
 		return USUARIOS.containsKey(email);
 	}
-
+	public Usuario getUsuario(String email) {
+		return USUARIOS.get(email);
+	}
 	public List<Usuario> listarTodos() {
 		return new ArrayList<>(USUARIOS.values());
 	}

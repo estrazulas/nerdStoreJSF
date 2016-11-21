@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.edu.ifsc.nerdstore.dao.CarrinhoDAO;
@@ -13,7 +13,7 @@ import br.edu.ifsc.nerdstore.modelo.Usuario;
 import br.edu.ifsc.nerdstore.util.JsfUtil;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class LoginBean implements Serializable {
 
 	/**
@@ -36,12 +36,12 @@ public class LoginBean implements Serializable {
 
 	public String efetuaLogin() {
 		System.out.println("Fazendo login do usuário " + this.usuario.getEmail());
-		boolean existe = dao.usuarioExiste(this.usuario.getEmail());
+		Usuario usuarioBanco = dao.getUsuario(this.usuario.getEmail());
 
 		FacesContext fc = JsfUtil.getFacesContext();
-		if (existe) {
-			fc.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
-			fc.getExternalContext().getSessionMap().put("carrinho", CarrinhoDAO.getInstance().adicionaCarrinhoSeNaoTem(usuario.getId()) );
+		if (usuarioBanco!=null) {
+			fc.getExternalContext().getSessionMap().put("usuarioLogado", usuarioBanco);
+			fc.getExternalContext().getSessionMap().put("carrinho", CarrinhoDAO.getInstance().adicionaCarrinhoSeNaoTem(usuarioBanco.getId()) );
 			return "loja?faces-redirect=true";
 		}
 		fc.getExternalContext().getFlash().setKeepMessages(true);

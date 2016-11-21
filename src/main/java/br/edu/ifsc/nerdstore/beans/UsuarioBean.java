@@ -39,17 +39,19 @@ public class UsuarioBean  implements Serializable{
 	
 	public RedirectView  gravar() 
 	{
-		System.out.println("Gravando usuário " + novo.getEmail());
+		
 
 		if(!dao.usuarioExiste(novo.getEmail())){
 			dao.adiciona(this.novo);
+			System.out.println("Gravando usuário " + novo.getEmail());
 		}else{
 			FacesContext fc = JsfUtil.getFacesContext();
 			fc.addMessage(null, new FacesMessage("Usuário já existe!"));
+			fc.getExternalContext().getFlash().setKeepMessages(true);
 			return new RedirectView("usuario");
 		}
 		
-		return new RedirectView("loja");
+		return new RedirectView("usuarios");
 	}
 	
 }
