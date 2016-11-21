@@ -8,8 +8,9 @@
 <h:head />
 <h:body>
 	<div id="cabecalho">
-		<p:panel styleClass="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
-			<p:panelGrid  columns="1">
+		<p:panel
+			styleClass="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+			<p:panelGrid columns="1">
 				<p:graphicImage
 					url="https://cuponomia-a.akamaihd.net/img/stores/original/nerdstore.jpg" />
 				<h:form style="width:60%;margin:auto" id="tema">
@@ -66,6 +67,22 @@
 	<div id="conteudo">
 		<ui:insert name="conteudo">
 		</ui:insert>
+	</div>
+	<div id="rodape">
+		<p:layout style="min-width:400px;min-height:400px;">
+			<p:layoutUnit position="west" size="800" >
+				<p:galleria value="#{lojaBean.images}" var="image" panelWidth="790"
+					panelHeight="300">
+					<p:graphicImage  url="#{image}" alt="Image Description for #{image}"
+						title="#{image}" />
+				</p:galleria>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<p:clock pattern="dd/MM/yyyy HH:mm:ss" mode="server" />
+			</p:layoutUnit>
+		</p:layout>
+
 	</div>
 </h:body>
 </html>

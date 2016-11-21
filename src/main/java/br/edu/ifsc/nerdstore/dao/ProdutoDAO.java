@@ -3,6 +3,7 @@ package br.edu.ifsc.nerdstore.dao;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,17 @@ public class ProdutoDAO {
 
 	public int quantidadeDeElementos() {
 		return PRODUTOS.size();
+	}
+
+	public List<String> getImagens() {
+		List<String> linksImages = new ArrayList<>();
+		List<Produto> produtos = this.buscaPorSimilaridade(null);
+		for (Iterator<Produto> iterator = produtos.iterator(); iterator.hasNext();) {
+			Produto produto = (Produto) iterator.next();
+			linksImages.add(produto.getUrlImagem());
+		}
+				
+		return linksImages;
 	}
 
 

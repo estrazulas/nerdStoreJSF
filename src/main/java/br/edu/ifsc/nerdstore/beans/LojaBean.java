@@ -26,6 +26,8 @@ public class LojaBean implements Serializable {
 	
 	private Integer quantidadeAtual;
 	
+	private List<String> images;
+	
 	public Integer getQuantidadeAtual() {
 		return quantidadeAtual;
 	}
@@ -64,6 +66,10 @@ public class LojaBean implements Serializable {
 		CarrinhoCompras carrinho = (CarrinhoCompras) fc.getExternalContext().getSessionMap().get("carrinho");
 		carrinho.adicionaProduto(ProdutoDAO.getInstance().buscaPorId(idProduto), this.getQuantidadeAtual());
 		return "carrinho?faces-redirect=true";
+	}
+
+	public List<String> getImages() {
+		return ProdutoDAO.getInstance().getImagens();
 	}
 
 }
