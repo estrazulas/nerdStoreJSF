@@ -8,20 +8,22 @@
 <h:head />
 <h:body>
 	<div id="cabecalho">
-		<h:panelGrid columns="2">
-			<p:graphicImage
-				url="https://cuponomia-a.akamaihd.net/img/stores/original/nerdstore.jpg" />
-			<h:form id="tema">
-				<p:themeSwitcher id="basic" style="width:165px"
-					value="#{temaBean.tema}">
-					<f:selectItem itemLabel="Choose Theme" itemValue="" />
-					<f:selectItems value="#{temaBean.temas}" var="tema"
-						itemLabel="#{tema}" itemValue="#{tema}" />
-					<f:ajax />
-				</p:themeSwitcher>
-			</h:form>
+		<p:panel styleClass="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+			<p:panelGrid  columns="1">
+				<p:graphicImage
+					url="https://cuponomia-a.akamaihd.net/img/stores/original/nerdstore.jpg" />
+				<h:form style="width:60%;margin:auto" id="tema">
+					<p:themeSwitcher id="basic" style="width:165px"
+						value="#{temaBean.tema}">
+						<f:selectItem itemLabel="Choose Theme" itemValue="" />
+						<f:selectItems value="#{temaBean.temas}" var="tema"
+							itemLabel="#{tema}" itemValue="#{tema}" />
+						<f:ajax />
+					</p:themeSwitcher>
+				</h:form>
 
-		</h:panelGrid>
+			</p:panelGrid>
+		</p:panel>
 		<p:growl id="messages" showDetail="true" autoUpdate="true" />
 
 		<h:form rendered="#{usuarioLogado != null}" id="menubar">
@@ -43,7 +45,8 @@
 				</p:submenu>
 				<p:menuitem value="#{mensagens['sistema.loja']}"
 					action="loja?faces-redirect=true" icon="fa fa-fw fa-home" />
-				<p:menuitem  style="position: absolute; right: 6px;" action="carrinho?faces-redirect=true"
+				<p:menuitem style="position: absolute; right: 6px;"
+					action="carrinho?faces-redirect=true"
 					icon="fa fa-fw fa-cart-arrow-down">
 					<h:outputLabel value="#{mensagens['carrinho.total']}" /> -
 						 <h:outputText style="font-weight:bold"
@@ -53,7 +56,7 @@
 					</h:outputText>
 				</p:menuitem>
 				<p:menuitem value="#{mensagens['loja.sair']}"
-						action="#{loginBean.deslogar}" icon="fa fa-fw fa-sign-out" />
+					action="#{loginBean.deslogar}" icon="fa fa-fw fa-sign-out" />
 			</p:menubar>
 		</h:form>
 		<h1>
