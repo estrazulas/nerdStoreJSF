@@ -13,9 +13,9 @@
 	</ui:define>
 	<ui:define name="conteudo">
 		<p:dataGrid var="produto" value="#{lojaBean.produtos}" columns="2"
-			layout="grid" rows="6" paginator="true" id="gridProdutos"
+			layout="grid" rows="4" paginator="true" id="gridProdutos"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="6,12,16">
+			rowsPerPageTemplate="4,6,8">
 
 			<f:facet name="header">
            	#{mensagens['loja.titulo']}
