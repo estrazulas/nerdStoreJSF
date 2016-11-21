@@ -70,16 +70,41 @@
 	</div>
 	<div id="rodape">
 		<p:layout style="min-width:400px;min-height:400px;">
-			<p:layoutUnit position="west" size="800" >
+			<p:layoutUnit position="west" size="800">
 				<p:galleria value="#{lojaBean.images}" var="image" panelWidth="790"
 					panelHeight="300">
-					<p:graphicImage  url="#{image}" alt="Image Description for #{image}"
+					<p:graphicImage url="#{image}" alt="Image Description for #{image}"
 						title="#{image}" />
 				</p:galleria>
 			</p:layoutUnit>
 
 			<p:layoutUnit position="center">
 				<p:clock pattern="dd/MM/yyyy HH:mm:ss" mode="server" />
+				<p:carousel value="#{lojaBean.produtos}" var="produto"
+					numVisible="1" easing="easeOutBounce" style="width:100%"
+					cricular="true">
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="label,value">
+						<f:facet name="header">
+							<p:graphicImage width="200" height="200"
+								url="#{produto.urlImagem}" />
+						</f:facet>
+
+						<h:outputText value="Id:" />
+						<h:outputText value="#{produto.id}" />
+
+						<h:outputText value="Nome" />
+						<h:outputText value="#{produto.nome}" />
+
+						<h:outputText value="Preço:" />
+						<h:outputText value="#{produto.preco}">
+							<f:convertNumber type="currency" pattern="R$ #0.00"
+								currencySymbol="R$" locale="pt_BR" />
+						</h:outputText>
+
+
+					</h:panelGrid>
+				</p:carousel>
 			</p:layoutUnit>
 		</p:layout>
 
