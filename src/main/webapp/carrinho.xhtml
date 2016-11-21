@@ -24,7 +24,7 @@
 						<f:facet name="header">#{mensagens['carrinho.titulo']}</f:facet>
 
 						<p:column>
-							<p:graphicImage url="#{item.getProduto().urlImagem}" width="100" height="100"/>
+							<p:graphicImage url="#{item.getProduto().urlImagem}" width="100" height="100"/><br/>
 							<h:outputText value="#{item.getProduto().nome}" />
 						</p:column>
 						<p:column headerText="#{mensagens['itemcarrinho.precounitario']}">
