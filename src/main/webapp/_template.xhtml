@@ -93,10 +93,10 @@
 						<h:outputText value="Id:" />
 						<h:outputText value="#{produto.id}" />
 
-						<h:outputText value="Nome" />
+						<h:outputText value="#{mensagens['produto.nome']}" />
 						<h:outputText value="#{produto.nome}" />
 
-						<h:outputText value="Preço:" />
+						<h:outputText value="#{mensagens['produto.preco']}:" />
 						<h:outputText value="#{produto.preco}">
 							<f:convertNumber type="currency" pattern="R$ #0.00"
 								currencySymbol="R$" locale="pt_BR" />
